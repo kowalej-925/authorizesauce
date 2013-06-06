@@ -128,3 +128,4 @@ class TransactionAPI(object):
         params['x_type'] = 'VOID'
         params['x_trans_id'] = transaction_id
         return self._make_call(params)
+        

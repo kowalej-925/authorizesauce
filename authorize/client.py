@@ -17,11 +17,12 @@ Authorize.net_.
 
 """
 
-from uuid import uuid4
-
 from authorize.apis.customer import CustomerAPI
 from authorize.apis.recurring import RecurringAPI
 from authorize.apis.transaction import TransactionAPI
+from authorize.apis.transaction_detail import TransactionDetailAPI
+from uuid import uuid4
+
 
 
 class AuthorizeClient(object):
@@ -44,6 +45,8 @@ class AuthorizeClient(object):
         self.test = test
         self._transaction = TransactionAPI(login_id, transaction_key,
             debug, test)
+        self._transaction_detail = TransactionDetailAPI(login_id, transaction_key,
+            debug, test)
         self._recurring = RecurringAPI(login_id, transaction_key, debug, test)
         self._customer = CustomerAPI(login_id, transaction_key, debug, test)
 
@@ -65,7 +68,9 @@ class AuthorizeClient(object):
         :class:`AuthorizeTransaction <authorize.client.AuthorizeTransaction>`
         instance you can then use to settle, credit or void that transaction.
         """
-        return AuthorizeTransaction(self, uid)
+        txn = AuthorizeTransaction(self, uid)
+        txn.full_response = self._transaction_detail.details(uid)
+        return txn
 
     def saved_card(self, uid):
         """
