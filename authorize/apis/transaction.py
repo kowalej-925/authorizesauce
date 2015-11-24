@@ -102,7 +102,7 @@ class TransactionAPI(object):
             params['x_amount'] = str(amount)
         return self._make_call(params)
 
-    def credit(self, card_num, transaction_id, amount):
+    def credit(self, card_num, transaction_id, amount, duplicate_window=120):
         # Authorize.net can do unlinked credits (not tied to a previous
         # transaction) but we do not (at least for now).
         # Provide the last four digits for the card number, as well as the
@@ -117,6 +117,7 @@ class TransactionAPI(object):
         #   transaction being settled.
         params = self.base_params.copy()
         params['x_type'] = 'CREDIT'
+        params['x_duplicate_window'] = str(duplicate_window)
         params['x_trans_id'] = transaction_id
         params['x_card_num'] = str(card_num)
         amount = Decimal(str(amount)).quantize(Decimal('0.01'))
