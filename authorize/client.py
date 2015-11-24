@@ -227,7 +227,7 @@ class AuthorizeTransaction(object):
         transaction.full_response = response
         return transaction
 
-    def credit(self, card_number, amount):
+    def credit(self, card_number, amount, duplicate_window=120):
         """
         Creates a credit (refund) back on the original transaction. The
         ``card_number`` should be the last four digits of the credit card
@@ -252,7 +252,7 @@ class AuthorizeTransaction(object):
           the original transaction was settled.
         """
         response = self._client._transaction.credit(
-            card_number, self.uid, amount)
+            card_number, self.uid, amount, duplicate_window=duplicate_window)
         transaction = self._client.transaction(response['transaction_id'])
         transaction.full_response = response
         return transaction
