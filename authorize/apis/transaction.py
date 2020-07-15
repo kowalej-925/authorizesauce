@@ -1,5 +1,6 @@
 from decimal import Decimal
 import urllib
+import requests
 
 from authorize.exceptions import AuthorizeConnectionError, \
     AuthorizeResponseError
@@ -39,13 +40,8 @@ class TransactionAPI(object):
         }
 
     def _make_call(self, params):
-        params = urllib.urlencode(params)
-        url = '{0}?{1}'.format(self.url, params)
-        try:
-            response = urllib.urlopen(url).read()
-        except IOError as e:
-            raise AuthorizeConnectionError(e)
-        fields = parse_response(response)
+        response = requests.post(self.url, data=params)
+        fields = parse_response(response.content)
         if fields['response_code'] != '1':
             e = AuthorizeResponseError('%s full_response=%r' %
                 (fields['response_reason_text'], fields))
