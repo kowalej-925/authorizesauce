@@ -1,4 +1,4 @@
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 from datetime import date
 
 import mock

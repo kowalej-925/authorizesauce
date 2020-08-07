@@ -1,5 +1,4 @@
 from decimal import Decimal
-import urllib
 import requests
 
 from authorize.exceptions import AuthorizeConnectionError, \
@@ -23,7 +22,7 @@ RESPONSE_FIELDS = {
 def parse_response(response):
     response = response.split(';')
     fields = {}
-    for index, name in RESPONSE_FIELDS.items():
+    for index, name in list(RESPONSE_FIELDS.items()):
         fields[name] = response[index]
     return fields
 
@@ -66,7 +65,7 @@ class TransactionAPI(object):
                 'x_zip': address.zip_code,
                 'x_country': address.country,
             })
-        for key, value in params.items():
+        for key, value in list(params.items()):
             if value is None:
                 del params[key]
         return params
