@@ -1,5 +1,5 @@
 from decimal import Decimal
-import urllib
+from six.moves.urllib_parse import urlencode
 
 from suds import WebFault
 from suds.client import Client
@@ -16,7 +16,7 @@ class TransactionDetailAPI(object):
         self.url = TEST_URL if debug else PROD_URL
         self.login_id = login_id
         self.transaction_key = transaction_key
-        self.transaction_options = urllib.urlencode({
+        self.transaction_options = urlencode({
             'x_version': '3.1',
             'x_test_request': 'Y' if test else 'F',
             'x_delim_data': 'TRUE',

@@ -40,8 +40,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Authorize Sauce'
-copyright = u'2012, Jeff Schenck'
+project = 'Authorize Sauce'
+copyright = '2012, Jeff Schenck'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -183,8 +183,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'AuthorizeSauce.tex', u'Authorize Sauce Documentation',
-   u'Jeff Schenck', 'manual'),
+  ('index', 'AuthorizeSauce.tex', 'Authorize Sauce Documentation',
+   'Jeff Schenck', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -213,8 +213,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'authorizesauce', u'Authorize Sauce Documentation',
-     [u'Jeff Schenck'], 1)
+    ('index', 'authorizesauce', 'Authorize Sauce Documentation',
+     ['Jeff Schenck'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -227,8 +227,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'AuthorizeSauce', u'Authorize Sauce Documentation',
-   u'Jeff Schenck', 'AuthorizeSauce', 'One line description of project.',
+  ('index', 'AuthorizeSauce', 'Authorize Sauce Documentation',
+   'Jeff Schenck', 'AuthorizeSauce', 'One line description of project.',
    'Miscellaneous'),
 ]
 
