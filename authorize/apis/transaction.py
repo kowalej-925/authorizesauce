@@ -1,5 +1,6 @@
 from decimal import Decimal
 import requests
+import six
 
 from authorize.exceptions import AuthorizeConnectionError, \
     AuthorizeResponseError
@@ -40,7 +41,7 @@ class TransactionAPI(object):
 
     def _make_call(self, params):
         response = requests.post(self.url, data=params)
-        fields = parse_response(response.content)
+        fields = parse_response(six.ensure_str(response.content))
         if fields['response_code'] != '1':
             e = AuthorizeResponseError('%s full_response=%r' %
                 (fields['response_reason_text'], fields))
