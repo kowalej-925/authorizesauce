@@ -41,7 +41,7 @@ class TransactionAPI(object):
 
     def _make_call(self, params):
         response = requests.post(self.url, data=params)
-        fields = parse_response(response.content)
+        fields = parse_response(response.text)
         if fields['response_code'] != '1':
             e = AuthorizeResponseError('%s full_response=%r' %
                 (fields['response_reason_text'], fields))
@@ -66,9 +66,7 @@ class TransactionAPI(object):
                 'x_zip': address.zip_code,
                 'x_country': address.country,
             })
-        for key, value in params.items():
-            if value is None:
-                del params[key]
+        params = {k:v for k,v in params.items() if v is not None}
         return params
 
     def auth(self, amount, credit_card, address=None):
